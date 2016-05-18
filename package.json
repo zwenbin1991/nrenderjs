@@ -1,0 +1,35 @@
+{
+  "name": "nrenderjs",
+  "version": "1.0.0",
+  "description": "a new renderjs for H5 mag",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scutxieyun/nrenderjs.git"
+  },
+  "keywords": [
+    "h5",
+    "mag"
+  ],
+  "author": "yun xie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scutxieyun/nrenderjs/issues"
+  },
+  "homepage": "https://github.com/scutxieyun/nrenderjs#readme",
+  "dependencies": {
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-react": "^6.5.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-command": "^0.1.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-webpack": "^1.5.0"
+  }
+}
