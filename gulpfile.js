@@ -18,6 +18,7 @@ var source_set = null;
 jsx = ["src/MeVPads.js",
 	"src/components/MePage.js",
 	"src/components/MeAnimation.js",
+	"src/components/MeSwipeTrigger.js",
 	"samples/mag_1.jsx",
 	"index.js"
 ];
@@ -31,11 +32,11 @@ gulp.task("babel", function(){
         pipe(gulp.dest("dist"));
 });
 
-gulp.task("pack",function(){
+gulp.task("pack",["babel"],function(){
 	return gulp.src("dist/index.js")
 	.pipe(webpack())
 	.pipe(rename("test.js"))
 	.pipe(gulp.dest("."));
 });
 
-gulp.task("default",["babel","pack"]);
+gulp.task("default",["pack"]);

@@ -25,9 +25,14 @@ define("me-article",[],function(){
 	};
 	
 	MeArticle.prototype.getPageByIdx = function(idx){
-		return this.getPage(this.article.reading_page_index[idx]);
-	}
-	
+		if(idx < 0 || idx >= this.article.pages.length) return null;
+		return this.article.pages[idx];
+	};
+	MeArticle.prototype.getPageInstanceByIdx = function(idx){
+		if(idx < 0 || idx >= this.article.pages.length) return null;
+		if(this.article.react_page_instances[idx] != undefined) return this.article.react_page_instances[idx];
+		else return null;
+	};
 	MeArticle.prototype.getPage = function(key){
 		var page = null;
 		if(typeof key === "number"){
