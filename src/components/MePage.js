@@ -9,9 +9,8 @@ define("MePage",function(){
 		},
 		componentDidUpdate:function(prevProps,prevState){
 			if(prevState.active != this.state.active){
-				var pageActEvt = "page-" + this.props.page_id + ":active_change"
-				console.log("page ",this.props.page_id," become active and set out " + pageActEvt);
-				this.props.ee.emitEvent("page-" + this.props.page_id + ":active_change",[{target:this,active:this.state.active}]);
+				var pageActEvt = this.props.page_id + ":" + (this.state.active ? "active":"deactive");
+				this.props.ee.emitEvent(pageActEvt,[{target:this,active:this.state.active}]);
 			}
 		},
 		render:function(){

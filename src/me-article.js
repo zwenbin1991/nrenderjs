@@ -56,6 +56,8 @@ define("me-article",[],function(){
 	MeArticle.prototype.getNumOfPage = function(){
 		return this.article.num_of_page;
 	}
-	
+	MeArticle.prototype.getCxt = function(){
+		return this.article.cxt;
+	}
 	return MeArticle;
 });

@@ -23,6 +23,7 @@
   "dependencies": {
     "EventEmitter": "^1.0.0",
     "react": "^15.0.2",
+	"object-assign": "^4.0.1",  
     "react-dom": "^15.0.2",
     "react-hammerjs": "^0.4.6",
     "wolfy87-eventemitter": "^5.0.0"

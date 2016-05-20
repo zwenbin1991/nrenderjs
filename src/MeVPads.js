@@ -2,6 +2,7 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var MeArticle = require("../src/me-article.js");
 var Mag_1 = require("../dist/mag_1.js");
+var Hammer = require("react-hammerjs");
 var PadBuffer = React.createClass({
 	getDefaultProps:function(){
 		return {
@@ -44,6 +45,55 @@ var PadBuffer = React.createClass({
 		else return <div id={this.props.id} className={className} style={css}></div>;
 	},
 });
+
+
+/***
+对hammer进行扩展，在一个大的Touch Div下，处理事件的propogation prevent
+**/
+var MeHammer = function(hammer,default_handler){
+	var self = this;
+	this.hammer = hammer;
+	this.defaultHandler = default_handler;
+	this.listeners = {};
+	this.hammer.on("swipeleft swiperight swipeup swipedown",function(evt){self.handleSwipe(evt);});
+}
+MeHammer.prototype.handleSwipe = function(evt){
+	if(this.listeners.hasOwnProperty(evt.type)){
+		var evt_listeners = this.listeners[evt.type];
+		var curElm = evt.target;
+		//向上遍历数，直到hammer的绑定元素
+		while(curElm != null && curElm != this.hammer.element){
+			for(i = 0;i < evt_listeners.length;i ++){
+				if(evt_listeners[i].elem == curElm){
+					if(evt_listeners[i].func.apply([evt]) == false) return;
+				}
+			}
+			curElm = curElm.parentElement;
+		}
+	}
+	if(this.defaultHandler.hasOwnProperty(evt.type)){
+		this.defaultHandler[evt.type].apply([evt]);
+	}
+}
+MeHammer.prototype.on = function(evttype,_elem,_func){
+	if(!this.listeners.hasOwnProperty(evttype)) this.listeners[evttype] = [];
+	this.listeners[evttype].push({elem:_elem,func:_func});
+	return;
+};
+MeHammer.prototype.off = function(evttype,source){
+	if(!this.listeners.hasOwnProperty(evttype)) return;
+	var evt_listeners = this.listeners[evttype];
+	var i = 0;
+	for(i = 0;i < evt_listeners.length;i ++){
+		if(evt_listeners[i].elem == source)break;
+	}
+	if(i < evt_listeners.length){
+		evt_listeners.splice(i,1);
+	}
+};
+/**
+虚拟操作面板
+**/
 var MeVPads = React.createClass({
 	getInitialState:function(){
 		this.lastTouchX = null;
@@ -117,17 +167,33 @@ var MeVPads = React.createClass({
 		this.lastDeltaX = 0;
 		console.log("pad detect touch");
 	},
+	
+	handleSwipe:function(evt){
+		console.log("swipe ",evt);
+		if(evt.direction == 2){
+			this.moveNext();
+		}else if (evt.direction == 1){
+			this.movePrev();
+		}
+	},
+	handleTap:function(evt){
+		console.log("get tap in pad ",evt);
+	},
 	componentDidMount:function(){
 		this.moveNext();
 	},
 	_registerBuffer:function(ref){
 		this.bufferItems[ref.props.id] = ref;
 	},
+	_registerHammer:function(ref){
+		//this.hammer = ref;
+		this.props.article.getCxt().interactHandler = new MeHammer(ref.hammer,{"swipeleft":this.moveNext,"swiperight":this.movePrev});
+	},
 	render:function(){
 		
 		var offset_x = -(this.props.pageWidth * this.state.actPosIndex) + this.state.offset;
 		var divStyle = {
-			width: "640px",
+			width: "auto",
 			height: "1008px",
 			"transform":"translate3d(" + offset_x + "px,0px,0px)",
 			"backfaceVisibility": "hidden", 
@@ -142,11 +208,13 @@ var MeVPads = React.createClass({
 			items.push(<PadBuffer id={i} posIdx={i} ref={self._registerBuffer} article = {self.props.article}></PadBuffer>)
 		}
 		return (
-			<div onTouchCancel={this.handleTouchEnd} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove} onTouchStart={this.handleTouchStart} id="oper-area" className ="magazine-page-container show">
+			<Hammer ref={this._registerHammer} id="oper-area" className ="magazine-page-container show">
+			<div>
 			<div style={divStyle}>
 			{items}
 			</div>
 			</div>
+			</Hammer>
 		);
 	},
 	
