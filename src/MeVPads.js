@@ -1,14 +1,13 @@
+define("mevpads",function(){
 var React = require("react");
 var ReactDOM = require("react-dom");
-var MeArticle = require("../src/me-article.js");
-var Mag_1 = require("../dist/mag_1.js");
 var Hammer = require("react-hammerjs");
 var PadBuffer = React.createClass({
 	getDefaultProps:function(){
 		return {
 			article:null,
 			idx:0,
-			pageWidth:600,
+			pageWidth:720,
 			posIdx:0,
 		};
 	},
@@ -107,8 +106,8 @@ var MeVPads = React.createClass({
 	getDefaultProps:function(){
 		return {
 			bufferLen:3,
-			pageHeight:1008,
-			pageWidth:600,
+			pageHeight:1192,
+			pageWidth:720,
 			article:null,
 		};
 	},
@@ -213,6 +212,7 @@ var MeVPads = React.createClass({
 			<div style={divStyle}>
 			{items}
 			</div>
+			{self.props.article.getToolBar()}
 			</div>
 			</Hammer>
 		);
@@ -220,4 +220,5 @@ var MeVPads = React.createClass({
 	
 });
 
-module.exports = MeVPads;
+	return MeVPads;
+});

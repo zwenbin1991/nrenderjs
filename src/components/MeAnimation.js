@@ -2,7 +2,7 @@ define("MeAnimation",function(){
 var React = require("react");
 var ReactDOM = require("react-dom");
 var _assign = require("object-assign");	
-	var MePage  = React.createClass({
+	var MeAnimation  = React.createClass({
 		getInitialState:function(){
 			return{
 				animationState:"no start"
@@ -47,7 +47,7 @@ var _assign = require("object-assign");
 		},
 		render:function(){
 			var className = (this.state.animationState == "start" ? this.props.className_Active + " " + this.props.animationClass:this.props.className_Deactive);
-			return <div className={className} style={_assign(this.props.animation,this.props.normalStyle)}> <img src="http://www.sinaimg.cn/dy/slidenews/1_img/2016_20/2841_694171_482050.jpg"></img></div>
+			return <div className={className} style={_assign(this.props.animation,this.props.normalStyle)}> {this.props.children}</div>
 		}});
-	return MePage;
+	return MeAnimation;
 });

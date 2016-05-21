@@ -59,5 +59,8 @@ define("me-article",[],function(){
 	MeArticle.prototype.getCxt = function(){
 		return this.article.cxt;
 	}
+	MeArticle.prototype.getToolBar = function(){
+		return this.article.toolBar;
+	}
 	return MeArticle;
 });

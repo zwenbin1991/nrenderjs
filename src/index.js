@@ -6,5 +6,5 @@ var ReactDOM = require("react-dom");
 var EventEmitter = require("wolfy87-eventemitter");
 var _article = new MeArticle(Mag_1);
 var ee = new EventEmitter();
-var pads = ReactDOM.render((<MeVPads bufferLen={5} article= {_article}></MeVPads>),document.getElementById("example1"));
+var pads = ReactDOM.render((<MeVPads bufferLen={5} article= {_article}></MeVPads>),document.getElementById("magazine-container"));
 console.log(_article);

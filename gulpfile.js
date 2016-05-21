@@ -19,6 +19,8 @@ jsx = ["src/MeVPads.js",
 	"src/components/MePage.js",
 	"src/components/MeAnimation.js",
 	"src/components/MeSwipeTrigger.js",
+	"src/components/MeToolBar.js",
+	"src/components/MeMusic.js",
 	"samples/mag_1.jsx",
 	"index.js"
 ];
