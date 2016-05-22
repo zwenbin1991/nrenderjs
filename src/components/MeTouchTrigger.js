@@ -2,8 +2,8 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var Hammer = require("react-hammerjs");
 var _assign = require("object-assign");
-define("MeSwipeTrigger",function(){
-	var MeSwipeTrigger  = React.createClass({
+define("MeTouchTrigger",function(){
+	var MeTouchTrigger  = React.createClass({
 		getInitialState:function(){
 			return{
 				triggeredCount:0,
@@ -58,5 +58,5 @@ define("MeSwipeTrigger",function(){
 		render:function(){
 			return <div ref="meswipe" id="registerTouch" style={this.props.normalStyle}>{this.props.children}</div>
 		}});
-	return MeSwipeTrigger;
+	return MeTouchTrigger;
 });

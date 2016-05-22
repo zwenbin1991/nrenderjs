@@ -1,25 +1,20 @@
-define("me-article",[],function(){
+define("MeArtical",[],function(){
 	var MeArticle = function(art){
 		this.article = art;
-		this.reading_point = 0;
 	};
 	
-	MeArticle.prototype.readNextPage = function(){
-		if(this.reading_point >= this.article.reading_page_index.length - 1){
-			return null;
+	MeArticle.prototype.getNbrPageIdx = function(dir,idx,idy){
+		if(idy == undefined){
+		//一维结构，二维结构稍后
+			var innerIdx = idx + 1;		//layout数组比较特殊
+			if(innerIdx <= 0 || innerIdx >= this.article.layout.length) return -1;//超出边界
+			if(dir === "right")
+				return this.article.layout[innerIdx+1];
+			if(dir === "left")
+				return this.article.layout[innerIdx-1];
 		}
-		this.reading_point ++;
-		return this.getCurPage(this.article.reading_page_index[this.reading_point]);
+		return -1;
 	};
-	
-	MeArticle.prototype.readPrevPage = function(){
-		if(this.reading_point <= 0){
-			return null;
-		}
-		this.reading_point --;
-		return this.getCurPage();
-	};
-	
 	MeArticle.prototype.getCurPage = function(){
 		return this.getPage(this.article.reading_page_index[this.reading_point]);
 	};
@@ -29,9 +24,7 @@ define("me-article",[],function(){
 		return this.article.pages[idx];
 	};
 	MeArticle.prototype.getPageInstanceByIdx = function(idx){
-		if(idx < 0 || idx >= this.article.pages.length) return null;
-		if(this.article.react_page_instances[idx] != undefined) return this.article.react_page_instances[idx];
-		else return null;
+		return this.article.cxt.pageMgr.getPageInstance(idx);
 	};
 	MeArticle.prototype.getPage = function(key){
 		var page = null;
@@ -48,14 +41,9 @@ define("me-article",[],function(){
 		}
 		return page;
 	};
-	MeArticle.prototype.renderPage = function(key,container){
-		var page = this.getPage();
-		if(page != null)
-			ReactDOM.createElement(page,container);
-	}
 	MeArticle.prototype.getNumOfPage = function(){
-		return this.article.num_of_page;
-	}
+		return this.article.pages.length;
+	};
 	MeArticle.prototype.getCxt = function(){
 		return this.article.cxt;
 	}

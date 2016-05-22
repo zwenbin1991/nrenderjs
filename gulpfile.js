@@ -18,9 +18,10 @@ var source_set = null;
 jsx = ["src/MeVPads.js",
 	"src/components/MePage.js",
 	"src/components/MeAnimation.js",
-	"src/components/MeSwipeTrigger.js",
+	"src/components/MeTouchTrigger.js",
 	"src/components/MeToolBar.js",
 	"src/components/MeMusic.js",
+	"src/components/MeInteractImage.js",
 	"samples/mag_1.jsx",
 	"index.js"
 ];
