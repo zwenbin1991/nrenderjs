@@ -14,7 +14,7 @@ var pageMgr = new MePageMgr(5);	//4 is the number of page
 var cxt = {
 	pageMgr:pageMgr,//作品范围的事件订阅器
 	ee:new EventEmitter(),
-	interactHandler:null
+	interactHandler:null,	//在MeVPads初始化后会制定这个handler
 };
 	var  article = {
 		"pages":[
@@ -30,7 +30,7 @@ var cxt = {
 					</MeAnimation>
 				</MeTouchTrigger>
 			</MePage>,
-			<MePage idx={1} cxt={cxt} idx ={1} normalStyle={{backgroundColor:"white",backgroundImage:'url("http://ac-hf3jpeco.clouddn.com/3225b3517d091debcc12?imageView2/2/w/640/h/853")'}}>
+			<MePage idx={1} cxt={cxt} normalStyle={{backgroundColor:"white",backgroundImage:'url("http://ac-hf3jpeco.clouddn.com/3225b3517d091debcc12?imageView2/2/w/640/h/853")'}}>
 				<MeAnimation cxt={cxt} listenEvt={{active:"page[1]:active",deactive:"page[1]:deactive"}} normalStyle={{top:"200px"}} animationClass="fadeInUp">
 				<div style={{fontSize:"46px",fontFamily:"css-font-111"}}>2015年7月25日<p>夏天，很热打扫我们</p><p>即将要开始新生活的住所</p></div>
 				</MeAnimation>
