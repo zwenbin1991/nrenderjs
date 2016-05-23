@@ -1,7 +1,7 @@
 var _ = require("underscore");
 var file = require("../../samples/154daa26719d3dce.js");
 var pages = file.tplData.pages;
-var MePageT = _.template("<MePage idx={<%= idx %>}></MePage");
+var MePageT = _.template("<MePage idx={<%= idx %>}></MePage>");
 var MeAnimationT = _.template("");
 
 console.log("test",MePageT);
