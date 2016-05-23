@@ -4,7 +4,13 @@
 
 	<meta name="viewport" content="width=640, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=yes">
 	<meta charset="utf-8">
-	<link href="animate_css/css/animate.css" rel="stylesheet" type="text/css"/>
+	<!--<link href="animate_css/css/animate.css" rel="stylesheet" type="text/css"/>
+	<link href="css/mobile.min.css" rel="stylesheet" type="text/css"/>-->
+	<link href="css/base.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="lib/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="lib/require.js"></script>
+	<script type="text/javascript" src="lib/renderjs.js"></script>
+	<!--<script type="text/javascript" src="lib/log4javascript.js"></script>-->
     <!--<script src="cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
     <script src="cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>-->
 
@@ -13,25 +19,66 @@
 <style>
 .page_container {
 	position:absolute;
-	height:1008px;
-	width:640px;
+	height:1192;
+	width:720px;
 }
 body{
 	overflow:hidden;
 }
+.hidden {
+	display:none
+}
 .me-page{
-	height:1008px;
-	width:640px;
+	height:1192px;
+	width:720px;
 	background-repeat:no-repeat;
 	-moz-background-size:100% 100%;
-	background-size:100% 100%;
+	background-size:cover;
 }
+.me-toolbar{
+	float:right;
+}
+.page_container.up{
+transform:translate3d(0px,-1020px,0px)
+},
+.page_container.down{
+transform:translate3d(0px,1020px,0px)}
+.page_container.left{
+transform:translate3d(-720px,0px,0px)}
+.page_container.right
+{transform:translate3d(720px,0px,0px)}
+.page_container.middle:
+{transform:translate3d(0px,px,0px)}
+.none{
+display:none}
 
 </style>
-
+<script type="text/javascript">
+//var log = log4javascript.getLogger("main");
+</script>
 </head>
 <body>
-<div id="example1"></div>
+<div id="pageContent">
+	<div id="magazine" class="ui_view_transitioning ui_page">
+		<nav id="magazine-nav">
+		<div id="browse-time-bar"></div>
+		<div id="magazine-back"></div>
+		<div id="magazine-menu-button" class="com-but-active"></div>
+		<div id="magazine-title">十二星座的穿衣风格</div>
+		</nav>
+		<div id="magazine-container" style="height:1192px">
+		</div>
+	</div>
+</div>
 </body>
-	<script src="test.js"></script>
+<script type="text/javascript">
+	$(function(){
+		require(["dist/mag_1.js"],function(mag_1){
+			var _article = new renderjs.MeArticle(mag_1);
+			var pads = renderjs.ReactDOM.render(renderjs.React.createElement(renderjs.MeVPads, { bufferLen: 5, article: _article }), document.getElementById("magazine-container"));
+
+		});
+		
+	});
+	</script>	
 </html>
