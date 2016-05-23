@@ -25,8 +25,6 @@ jsx = ["src/MeVPads.js",
 	"samples/mag_1.jsx",
 	"index.js"
 ];
-	
-	
 gulp.task("babel", function(){
     return gulp.src(jsx).
         pipe(babel({
@@ -37,9 +35,8 @@ gulp.task("babel", function(){
 
 gulp.task("pack",["babel"],function(){
 	return gulp.src("dist/index.js")
-	.pipe(webpack())
-	.pipe(rename("test.js"))
-	.pipe(gulp.dest("."));
+	.pipe(webpack(require("./webpack.config.js")))
+	.pipe(gulp.dest("lib"));
 });
 
 gulp.task("default",["pack"]);

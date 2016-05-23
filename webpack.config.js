@@ -1,7 +1,7 @@
 module.exports = {
     entry: "./src/renderjs_entry.js",
     output: {
-        path: "lib",
+        //path: "./lib",
         filename: "renderjs.js",
 		libraryTarget:"var",
 		library:"renderjs"

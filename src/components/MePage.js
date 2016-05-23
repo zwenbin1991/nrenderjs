@@ -37,7 +37,7 @@ define("MePage",function(){
 			}
 		},
 		componentDidMount:function(){
-			
+			//需要检查下是否did update被调用
 		},
 		componentDidUpdate:function(prevProps,prevState){
 			if(prevState.active != this.state.active){
