@@ -1,4 +1,4 @@
-{
+module.exports = {
     "tplObj": {
         "tpl_id": "154daa26719d3dce",
         "tpl_no": "",
@@ -10323,4 +10323,4 @@
         "createdAt": "2016-05-22T23:20:30.919Z",
         "updatedAt": "2016-05-22T23:20:30.919Z"
     }
-}
+};

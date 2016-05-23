@@ -59,7 +59,6 @@ var MeHammer = function(hammer,default_handler){
 	this.hammer.on("tap",function(evt){self.handleHammerEvent(evt);});
 }
 MeHammer.prototype.handleHammerEvent = function(evt){
-	console.log("receive " + evt.type);
 	if(this.listeners.hasOwnProperty(evt.type)){
 		var evt_listeners = this.listeners[evt.type];
 		var curElm = evt.target;
@@ -77,6 +76,13 @@ MeHammer.prototype.handleHammerEvent = function(evt){
 		this.defaultHandler[evt.type].apply([evt]);
 	}
 }
+/***
+停止当前的session，主要给Pan操作使用
+**/
+MeHammer.prototype.stop = function(){
+	this.hammer.stop();
+};
+
 MeHammer.prototype.on = function(evttype,_elem,_func){
 	var evts = evttype.split(" ");
 	for(var i = 0;i < evts.length; i ++){
@@ -205,7 +211,7 @@ var MeVPads = React.createClass({
 			}
 		}
 		
-		console.log(this.pageCache);
+		//console.log(this.pageCache);
 		
 	},
 	moveNext:function(){

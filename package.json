@@ -23,7 +23,7 @@
   "dependencies": {
     "EventEmitter": "^1.0.0",
     "react": "^15.0.2",
-	"object-assign": "^4.0.1",  
+    "object-assign": "^4.0.1",
     "react-dom": "^15.0.2",
     "react-hammerjs": "^0.4.6",
     "wolfy87-eventemitter": "^5.0.0"
@@ -34,6 +34,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-command": "^0.1.2",
     "gulp-rename": "^1.2.2",
-    "gulp-webpack": "^1.5.0"
+    "gulp-webpack": "^1.5.0",
+    "underscore": "^1.8.3"
   }
 }

@@ -5,6 +5,7 @@ var ReactDOM = require("react-dom");
 		getInitialState:function(){
 			this.xBeforePan = 0;
 			this.yBeforePan = 0;
+			this.lastDeltaTime = 0;
 			return {
 				x_offset:0,
 				y_offset:0,
@@ -21,14 +22,18 @@ var ReactDOM = require("react-dom");
 		interactHandle:function(evt){
 			if(evt.type == "pan"){
 				if(evt.additionalEvent == "panup" || evt.additionalEvent == "pandown"){
+					if(evt.deltaTime < this.lastDeltaTime)
+					{//新的事件,但却到达页尾的处理
+						this.xBeforePan = this.state.x_offset;
+						this.yBeforePan = this.state.y_offset;
+					}
+					this.lastDeltaTime = evt.deltaTime;
 					this.setState({
 						x_offset:0,//this.state.x_offset + evt.deltaX,
 						y_offset:this.yBeforePan + evt.deltaY
 					});
-				}
-				if(evt.additionalEvent == "panstart"){
-					this.xBeforePan = this.state.x_offset;
-					this.yBeforePan = this.state.y_offset;
+				}else{
+					//this.props.cxt.interactHandler.stop();
 				}
 			}
 			//console.log("receive ",evt);
